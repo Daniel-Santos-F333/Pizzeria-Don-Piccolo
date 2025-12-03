@@ -50,8 +50,7 @@ CREATE TABLE zona (
     id_zona INT AUTO_INCREMENT PRIMARY KEY,
     nombre_zona VARCHAR(100) UNIQUE NOT NULL,
     tarifa_base DOUBLE NOT NULL,
-    tiempo_estimado_min INT NOT NULL,
-    INDEX idx_nombre_zona (nombre_zona)
+    tiempo_estimado_min INT NOT NULL
 );
 
 -- 5ta Tabla: repartidor (Almacena los repartidores registrados. Hereda de persona y se relaciona con zona.)
@@ -64,9 +63,7 @@ CREATE TABLE repartidor (
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona) 
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (zona_asignada) REFERENCES zona(id_zona)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX idx_estado (estado),
-    INDEX idx_zona (zona_asignada)
+        ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- 6ta Tabla: categoria (Clasifica los productos, como 'pizzas' o 'bebidas'.)
@@ -74,8 +71,7 @@ CREATE TABLE categoria (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) UNIQUE NOT NULL,
     descripcion TEXT,
-    activa BOOLEAN DEFAULT TRUE,
-    INDEX idx_activa (activa)
+    activa BOOLEAN DEFAULT TRUE
 );
 
 -- 7ma Tabla: producto (Tabla padre central que contiene la información base de todos los artículos del menú.)
@@ -88,9 +84,7 @@ CREATE TABLE producto (
     disponible BOOLEAN DEFAULT TRUE,
     requiere_ingredientes BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX idx_disponible (disponible),
-    INDEX idx_categoria (id_categoria)
+        ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- 8va Tabla: pizza (Detalles específicos de las pizzas, como tamaño y tipo. Hereda de producto.)
@@ -100,9 +94,7 @@ CREATE TABLE pizza (
     tamano ENUM('personal', 'mediana', 'grande', 'familiar') NOT NULL,
     tipo ENUM('vegetariana', 'especial', 'clasica') NOT NULL,
     FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    INDEX idx_tipo (tipo),
-    INDEX idx_tamano (tamano)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- 9na Tabla: bebida (Detalles específicos de las bebidas, como tamaño y volumen. Hereda de producto.)
@@ -111,8 +103,7 @@ CREATE TABLE bebida (
     id_producto INT UNIQUE NOT NULL,
     tamano ENUM('pequena', 'mediana', 'grande', 'litro', 'dos_litros') NOT NULL,
     FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    INDEX idx_tamano (tamano)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- 10ma Tabla: ingrediente (Lista de ingredientes disponibles para la preparación y el control de inventario.)
@@ -122,8 +113,7 @@ CREATE TABLE ingrediente (
     stock_actual INT DEFAULT 0 NOT NULL,
     stock_minimo INT DEFAULT 10 NOT NULL,
     costo_unitario DOUBLE NOT NULL,
-    unidad_medida VARCHAR(20) NOT NULL,
-    INDEX idx_stock_bajo (stock_actual, stock_minimo)
+    unidad_medida VARCHAR(20) NOT NULL
 );
 
 -- 11ra Tabla: producto_ingrediente (Define la receta y se relaciona entre productos e ingredientes.)
@@ -136,9 +126,7 @@ CREATE TABLE producto_ingrediente (
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_ingrediente) REFERENCES ingrediente(id_ingrediente)
         ON DELETE RESTRICT ON UPDATE CASCADE,
-    UNIQUE KEY unique_producto_ingrediente (id_producto, id_ingrediente),
-    INDEX idx_producto (id_producto),
-    INDEX idx_ingrediente (id_ingrediente)
+    UNIQUE KEY unique_producto_ingrediente (id_producto, id_ingrediente)
 );
 
 -- 12da Tabla: pedido (El registro principal de cada orden realizada por un cliente.)

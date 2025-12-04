@@ -157,3 +157,14 @@ INSERT INTO repartidor (id_persona, zona_asignada, estado, total_entregas) VALUE
 
 INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098777777', 'cedula', 'Oscar', 'Reyes', '3007777777');
 INSERT INTO repartidor (id_persona, zona_asignada, estado, total_entregas) VALUES (LAST_INSERT_ID(), 4, 'disponible', 0);
+
+-- ============================================
+-- 10. PEDIDOS (25 pedidos)
+-- ============================================
+-- PEDIDO 1
+INSERT INTO pedido (id_cliente, id_empleado, fecha_hora, metodo_pago, estado, subtotal, costo_envio, iva, total, es_domicilio) 
+VALUES (1, 2, '2024-11-15 19:30:00', 'tarjeta', 'entregado', 58500, 3000, 11115, 72615, TRUE);
+INSERT INTO pedido_producto (id_pedido, id_producto, cantidad, precio_unitario, subtotal_linea) VALUES
+(1, 1, 2, 25000, 50000), (1, 8, 1, 8500, 8500);
+INSERT INTO domicilio (id_pedido, id_repartidor, id_zona, hora_salida, hora_entrega, distancia_km, costo_envio, direccion_entrega) 
+VALUES (1, 1, 1, '2024-11-15 20:00:00', '2024-11-15 20:15:00', 2.5, 3000, 'Calle 45 #27-15, Cabecera');

@@ -130,3 +130,30 @@ INSERT INTO cliente (id_persona, direccion, correo, cantidad_pedidos, es_frecuen
 
 INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098765442', 'cedula', 'Santiago', 'Mejía', '3154445555');
 INSERT INTO cliente (id_persona, direccion, correo, cantidad_pedidos, es_frecuente) VALUES (LAST_INSERT_ID(), 'Carrera 28 #47-25, Provenza', 'santiago.mejia@email.com', 0, FALSE);
+
+-- ============================================
+-- 8. PERSONAS - EMPLEADOS
+-- ============================================
+INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098111111', 'cedula', 'Roberto', 'Administrador', '3001111111');
+INSERT INTO empleado (id_persona, rol, activo) VALUES (LAST_INSERT_ID(), 'administrador', TRUE);
+
+INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098222222', 'cedula', 'Carolina', 'Moreno', '3002222222');
+INSERT INTO empleado (id_persona, rol, activo) VALUES (LAST_INSERT_ID(), 'cajero', TRUE);
+
+INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098333333', 'cedula', 'Daniel', 'Ortiz', '3003333333');
+INSERT INTO empleado (id_persona, rol, activo) VALUES (LAST_INSERT_ID(), 'cajero', TRUE);
+
+-- ============================================
+-- 9. PERSONAS - REPARTIDORES
+-- ============================================
+INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098444444', 'cedula', 'Javier', 'Mendoza', '3004444444');
+INSERT INTO repartidor (id_persona, zona_asignada, estado, total_entregas) VALUES (LAST_INSERT_ID(), 1, 'disponible', 0);
+
+INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098555555', 'cedula', 'Felipe', 'Castro', '3005555555');
+INSERT INTO repartidor (id_persona, zona_asignada, estado, total_entregas) VALUES (LAST_INSERT_ID(), 2, 'disponible', 0);
+
+INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098666666', 'cedula', 'Mauricio', 'Herrera', '3006666666');
+INSERT INTO repartidor (id_persona, zona_asignada, estado, total_entregas) VALUES (LAST_INSERT_ID(), 3, 'disponible', 0);
+
+INSERT INTO persona (documento, tipo_documento, nombre, apellido, telefono) VALUES ('1098777777', 'cedula', 'Oscar', 'Reyes', '3007777777');
+INSERT INTO repartidor (id_persona, zona_asignada, estado, total_entregas) VALUES (LAST_INSERT_ID(), 4, 'disponible', 0);

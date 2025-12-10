@@ -18,5 +18,14 @@
 -- ###############################################
 -- 2. Creación Tabla intermedia
     CREATE TABLE pedido_pizza(
-        
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        id_pedido INT NOT NULL,
+        id_pizza INT NOT NULL,
+        cantidad INT NOT NULL
+        FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido)
+            ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (id_pizza) REFERENCES pizza(id_pizza)
+            ON DELETE CASCADE ON UPDATE CASCADE
     );
+-- ###############################################
+-- 3. Consulta de pedidos por cliente

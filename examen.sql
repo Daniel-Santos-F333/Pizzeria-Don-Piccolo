@@ -25,10 +25,19 @@
         id_pedido INT NOT NULL,
         id_pizza INT NOT NULL,
         cantidad INT NOT NULL
-        FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido)
-            ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
         FOREIGN KEY (id_pizza) REFERENCES pizza(id_pizza)
-            ON DELETE CASCADE ON UPDATE CASCADE
-    );
+        );
 -- ###############################################
 -- 3. Consulta de pedidos por cliente
+        SELECT
+            PE.nombre,
+            cliente,
+            PD.total
+            PD.estado
+        FROM
+            persona PE
+        INNER JOIN
+            cliente C ON PE.id_persona = C.id_persona
+        INNER JOIN 
+            pedido PD ON C.id_cliente = PD.id_cliente;

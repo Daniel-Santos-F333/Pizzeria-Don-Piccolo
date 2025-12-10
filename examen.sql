@@ -5,6 +5,9 @@
 -- ##############################################
 -- Requerimientos:
 -- 1. Creación de tabla de pedidos
+
+    DROP TABLE pedido;
+
     CREATE TABLE  pedido(
         id_pedido INT AUTO_INCREMENT PRIMARY KEY,
         id_cliente INT NOT NULL,
